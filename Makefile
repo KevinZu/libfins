@@ -60,16 +60,20 @@ ifneq ($(OS),Windows_NT)
 OS:=$(shell uname -s)
 endif
 
+TOOLCHAIN_NAME = arm-linux-gnueabihf-
+
 INCDIR = include/
 LIBDIR = lib/
 OBJDIR = obj/
 SRCDIR = src/
-CC     = cc
+#CC     = cc
+CC = $(TOOLCHAIN_NAME)gcc
 RM     = /bin/rm -f
 OBJEXT = o
 LIBEXT = a
 OFLAG  = -o
-AR     = ar
+#AR     = ar
+AR = $(TOOLCHAIN_NAME)ar
 ARQC   = qc 
 ARQ    = q
 RANLIB = ranlib
