@@ -60,7 +60,7 @@ ifneq ($(OS),Windows_NT)
 OS:=$(shell uname -s)
 endif
 
-TOOLCHAIN_NAME = arm-linux-gnueabihf-
+#TOOLCHAIN_NAME = arm-linux-gnueabihf-
 
 INCDIR = include/
 LIBDIR = lib/
