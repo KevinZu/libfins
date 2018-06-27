@@ -265,7 +265,7 @@ struct fins_sys_tp *finslib_tcp_connect( struct fins_sys_tp *sys, const char *ad
 	fins_tcp_header[16] = 0x00;		/* Client node add			*/
 	fins_tcp_header[17] = 0x00;		/*					*/
 	fins_tcp_header[18] = 0x00;		/*					*/
-	fins_tcp_header[19] = 0x00;		/* Get node number automatically	*/
+	fins_tcp_header[19] = sys->local_node;		/* Get node number automatically	*/
 						/*					*/
 						/****************************************/
 	sendlen = 20;
@@ -448,7 +448,7 @@ static int fins_tcp_recv( struct fins_sys_tp *sys, unsigned char *buf, int len )
 		recv_len = recv( sys->sockfd, buf, len, 0 );
 
 		if ( recv_len > 0 ) {
-
+ printf("%s:%d\n",__FUNCTION__,__LINE__);
 			len       -= recv_len;
 			buf       += recv_len;
 			total_len += recv_len;
@@ -459,7 +459,7 @@ static int fins_tcp_recv( struct fins_sys_tp *sys, unsigned char *buf, int len )
 		else if ( recv_len < 0 ) {
 
 			if ( errno == EAGAIN ) {
-
+printf("%s:%d\n",__FUNCTION__,__LINE__);
 				finslib_milli_second_sleep( 10 );
 				continue;
 			}
@@ -666,7 +666,7 @@ static int fins_recv_tcp_header( struct fins_sys_tp *sys, int *error_val ) {
 
 	recvlen = 16;
 	retval  = fins_tcp_recv( sys, fins_tcp_header, recvlen );
-
+//printf("%s:%d\n",__FUNCTION__,__LINE__);
 	if ( retval < recvlen ) {
 
 		if ( error_val != NULL ) *error_val = FINS_RETVAL_RESPONSE_HEADER_INCOMPLETE;
@@ -764,12 +764,12 @@ int XX_finslib_communicate( struct fins_sys_tp *sys, struct fins_command_tp *com
 		if ( ( retval = fins_send_tcp_command( sys, *bodylen, command ) ) != FINS_RETVAL_SUCCESS ) return check_error_count( sys, retval );
 
 		recvlen = fins_recv_tcp_header( sys, & error_val );
-
+//printf("%s:%d\n",__FUNCTION__,__LINE__);
 		if ( recvlen <  0 ) return check_error_count( sys, error_val                  );
 		if ( recvlen == 0 ) return check_error_count( sys, FINS_RETVAL_BODY_TOO_SHORT );
 
 		if ( ( retval = fins_recv_tcp_command( sys, recvlen, command ) ) != FINS_RETVAL_SUCCESS ) return check_error_count( sys, retval );
-
+//printf("%s:%d\n",__FUNCTION__,__LINE__);
 		if ( command->header[FINS_ICF]  !=  (sent_header[FINS_ICF] | 0x40)  ||
 		     command->header[FINS_RSV]  !=                           0x00   ||
 		     command->header[FINS_DNA]  !=   sent_header[FINS_SNA]          ||

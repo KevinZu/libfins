@@ -156,16 +156,16 @@ const struct fins_area_tp *XX_finslib_search_area( struct fins_sys_tp *sys, cons
 	int a;
 
 	a = 0;
-
+printf("plc_mode:%d   bits:%d   accs:%d    force:%d  main_add:%d   name:%s\n",sys->plc_mode,bits,accs,force,address->main_address,address->name);
 	while ( fins_area[a].plc_mode != FINS_MODE_UNKNOWN ) {
 
-		if (   fins_area[a].plc_mode           != sys->plc_mode         ) { a++; continue; }
-		if (   fins_area[a].bits               != bits                  ) { a++; continue; }
-		if ( ( fins_area[a].access | accs )    == 0x00000000            ) { a++; continue; }
-		if (   fins_area[a].force              != force                 ) { a++; continue; }
-		if (   fins_area[a].low_id             >  address->main_address ) { a++; continue; }
-		if (   fins_area[a].high_id            <  address->main_address ) { a++; continue; }
-		if (   strcmp( fins_area[a].name, address->name )               ) { a++; continue; }
+		if (   fins_area[a].plc_mode           != sys->plc_mode         ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if (   fins_area[a].bits               != bits                  ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if ( ( fins_area[a].access | accs )    == 0x00000000            ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if (   fins_area[a].force              != force                 ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if (   fins_area[a].low_id             >  address->main_address ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if (   fins_area[a].high_id            <  address->main_address ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
+		if (   strcmp( fins_area[a].name, address->name )               ) { a++; /*printf("%d:%d\n",a,__LINE__);*/continue; }
 
 		break;
 	}

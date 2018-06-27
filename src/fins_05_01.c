@@ -35,7 +35,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "fins.h"
-
+#include <stdio.h>
 /*
  * int finslib_cpu_unit_data_read( fins_sys_tp *sys, fins_cpudata_tp *cpudata );
  *
@@ -57,7 +57,7 @@ int finslib_cpu_unit_data_read( struct fins_sys_tp *sys, struct fins_cpudata_tp 
 	if ( sys->sockfd == INVALID_SOCKET ) return FINS_RETVAL_NOT_CONNECTED;
 
 	XX_finslib_init_command( sys, & fins_cmnd, 0x05, 0x01 );
-
+//int i;for(i = 0;i < FINS_HEADER_LEN;i ++) printf("%d ",fins_cmnd.header[i]);printf("\n");for(i=0;i<10;i ++)printf("%d ",fins_cmnd.body[i]);printf("\n");
 	bodylen = 0;
 
 	if ( ( retval = XX_finslib_communicate( sys, & fins_cmnd, & bodylen ) ) != FINS_RETVAL_SUCCESS ) return retval;
@@ -129,7 +129,7 @@ int finslib_cpu_unit_data_read( struct fins_sys_tp *sys, struct fins_cpudata_tp 
 
 		cpudata->bus_unit_present[a] = fins_cmnd.body[94+2*a] & 0x80;
 	}
-	
+
 	return FINS_RETVAL_SUCCESS;
 
 }  /* finslib_cpu_unit_data_read */

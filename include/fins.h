@@ -29,7 +29,10 @@
  * -----------
  * The header file include/fins.h contains global definitions and prototypes
  * used for the communication over the Omron FINS protocol.
+ * 
  */
+
+
 
 #ifndef INCLUDED_FINSLIB_FINS_H
 #define INCLUDED_FINSLIB_FINS_H
@@ -49,6 +52,8 @@
 typedef int					SOCKET;
 #define closesocket				close
 #endif
+
+
 
 									/********************************************************/
 									/*							*/
