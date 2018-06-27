@@ -1,3 +1,5 @@
 #
 # Directory for example files
 #
+
+ gcc test.cpp -I../include -L../lib -lfins -o test
