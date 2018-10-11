@@ -2,4 +2,6 @@
 # Directory for example files
 #
 
- gcc test.cpp -I../include -L../lib -lfins -o test
+ gcc main.cpp -I../include -L../lib -lfins -o main
+ 
+ ./main &
