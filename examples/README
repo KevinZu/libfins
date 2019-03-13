@@ -2,8 +2,7 @@
 # Directory for example files
 #
 
-```
  gcc main.cpp -I../include -L../lib -lfins -o main
  
  ./main &
-```
+
